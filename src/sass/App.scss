@@ -1,0 +1,157 @@
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul[class],
+ol[class],
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+ul[class],
+ol[class] {
+  list-style: none;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.html {
+  font-size: 10px;
+}
+.App {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+.Landing {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.Landing__form {
+  height: 25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    color: grey;
+    font-size: 1.1rem;
+  }
+  input {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-top: 0.5rem;
+    width: 14rem;
+    height: 3rem;
+    border: 0.15rem solid grey;
+    border-radius: 0.3rem;
+  }
+  button {
+    width: 8rem;
+    height: 3rem;
+    background-color: white;
+    border: 0.15rem solid blue;
+    border-radius: 0.3rem;
+  }
+}
+.List {
+  margin: 0;
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  h1 {
+    font-size: 1.5rem;
+    text-align: center;
+    width: 80%;
+  }
+  .List__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .List__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 70%;
+    max-height: 70%;
+    width: 90%;
+    .List__List {
+      display: flex;
+      flex-direction: column;
+      height: 80%;
+      .List__member {
+        height: 12%;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        h2 {
+          text-align: center;
+          width: 50%;
+        }
+        div {
+          justify-content: center;
+          width: 50%;
+          display: flex;
+          align-items: center;
+        }
+        label {
+          width: 40%;
+        }
+        input {
+          margin-right: 0.5rem;
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+    }
+  }
+  .List__money {
+    height: 10%;
+
+    .right {
+      text-align: right;
+    }
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .List__buttons {
+    height: 10%;
+    display: flex;
+    justify-content: space-around;
+    button {
+      height: 60%;
+    }
+    .submit {
+      padding: 0.5rem 2rem 0.5rem 2rem;
+    }
+    width: 100%;
+  }
+}
+.grey {
+  background-color: rgb(233, 233, 233);
+}
+.darkgrey {
+  background-color: rgb(156, 156, 156);
+}
