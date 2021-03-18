@@ -32,6 +32,7 @@ ol[class] {
 }
 
 .App {
+  background-color: #4dcfc2;
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -57,7 +58,7 @@ ol[class] {
 }
 
 .Landing__form {
-  height: 25rem;
+  height: 30rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -70,6 +71,10 @@ ol[class] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.Landing__form h1 {
+  color: #0c4b86;
 }
 
 .Landing__form div {
@@ -83,7 +88,7 @@ ol[class] {
 }
 
 .Landing__form label {
-  color: grey;
+  color: #0c4b86;
   font-size: 1.1rem;
 }
 
@@ -93,15 +98,16 @@ ol[class] {
   margin-top: 0.5rem;
   width: 14rem;
   height: 3rem;
-  border: 0.15rem solid grey;
+  border: 0.2rem solid #0c4b86;
   border-radius: 0.3rem;
 }
 
 .Landing__form button {
+  color: #f0f0f0;
   width: 8rem;
   height: 3rem;
-  background-color: white;
-  border: 0.15rem solid blue;
+  background-color: #e96f28;
+  border: 0.2rem solid #e9dc22;
   border-radius: 0.3rem;
 }
 
@@ -109,6 +115,7 @@ ol[class] {
   margin: 0;
   height: 90vh;
   width: 100%;
+  position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -121,6 +128,30 @@ ol[class] {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.List .List__success {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.List .List__success div {
+  color: white;
 }
 
 .List h1 {
@@ -239,17 +270,28 @@ ol[class] {
 
 .List .List__buttons button {
   height: 60%;
+  border-radius: 0.2rem;
+  background-color: #7ab5f8;
+  border: 0.2rem solid #5399e9;
+  -webkit-transition: 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .List .List__buttons .submit {
   padding: 0.5rem 2rem 0.5rem 2rem;
 }
 
+.List .List__buttons .confirm {
+  background-color: #d6825b;
+  border: 0.2rem solid #e2b19b;
+  padding: 0.5rem 2rem 0.5rem 2rem;
+}
+
 .grey {
-  background-color: #e9e9e9;
+  background-color: #7ab5f8;
 }
 
 .darkgrey {
-  background-color: #9c9c9c;
+  background-color: #5399e9;
 }
 /*# sourceMappingURL=App.css.map */

@@ -26,7 +26,11 @@ ol[class] {
 .html {
   font-size: 10px;
 }
+$formColor: rgb(12, 75, 134);
+$background: rgb(77, 207, 194);
+
 .App {
+  background-color: $background;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -38,18 +42,22 @@ ol[class] {
   flex-direction: column;
   justify-content: center;
 }
+
 .Landing__form {
-  height: 25rem;
+  height: 30rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  h1 {
+    color: $formColor;
+  }
   div {
     display: flex;
     flex-direction: column;
   }
   label {
-    color: grey;
+    color: $formColor;
     font-size: 1.1rem;
   }
   input {
@@ -58,14 +66,15 @@ ol[class] {
     margin-top: 0.5rem;
     width: 14rem;
     height: 3rem;
-    border: 0.15rem solid grey;
+    border: 0.2rem solid $formColor;
     border-radius: 0.3rem;
   }
   button {
+    color: rgb(240, 240, 240);
     width: 8rem;
     height: 3rem;
-    background-color: white;
-    border: 0.15rem solid blue;
+    background-color: rgb(233, 111, 40);
+    border: 0.2rem solid rgb(233, 220, 34);
     border-radius: 0.3rem;
   }
 }
@@ -73,10 +82,26 @@ ol[class] {
   margin: 0;
   height: 90vh;
   width: 100%;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  .List__success {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div {
+      color: white;
+    }
+  }
   h1 {
     font-size: 1.5rem;
     text-align: center;
@@ -142,16 +167,25 @@ ol[class] {
     justify-content: space-around;
     button {
       height: 60%;
+      border-radius: 0.2rem;
+      background-color: rgb(122, 181, 248);
+      border: 0.2rem solid rgb(83, 153, 233);
+      transition: 0.5s ease;
     }
     .submit {
+      padding: 0.5rem 2rem 0.5rem 2rem;
+    }
+    .confirm {
+      background-color: rgb(214, 130, 91);
+      border: 0.2rem solid rgb(226, 177, 155);
       padding: 0.5rem 2rem 0.5rem 2rem;
     }
     width: 100%;
   }
 }
 .grey {
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(122, 181, 248);
 }
 .darkgrey {
-  background-color: rgb(156, 156, 156);
+  background-color: rgb(83, 153, 233);
 }
