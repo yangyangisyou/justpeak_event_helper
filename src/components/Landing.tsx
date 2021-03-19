@@ -35,8 +35,7 @@ function Landing({setEventData, setLogged, logged}: ILandingProp) {
         </div>
 
         <button
-          type='submit'
-          onClick={async () => {
+          onClick={async (evt) => {
             const result = await request.getParticipants({
               Code: passcode,
               HostName: hostName,

@@ -1,9 +1,18 @@
-import {useState} from 'react';
+import {Component, useState} from 'react';
 import './App.css';
 import Landing from './components/Landing';
 import List from './components/List';
 import {IEvent} from './models/models';
+// import dotenv from 'dotenv';
+// dotenv.config();
+export class Wrapper extends Component {
+  render() {
+    return <App />;
+  }
+}
 function App() {
+  console.log(process.env);
+
   const eventIni: IEvent = {
     eventId: 0,
     eventName: '',

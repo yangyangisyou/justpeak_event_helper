@@ -1,11 +1,13 @@
 import axios, {AxiosResponse} from 'axios';
 import {IEvent, IParticipant, IPassCode} from '../models/models';
+
+const host = process.env.REACT_APP_APIHOST;
 type EventInfo = IEvent;
 export const request = {
   getParticipants: async function (PassCode: IPassCode): Promise<EventInfo> {
     try {
       const result: AxiosResponse<any> = await axios.post(
-        'http://localhost:5000/login',
+        `${host}/login`,
         PassCode
       );
       return result.data;
@@ -22,7 +24,7 @@ export const request = {
     event.participants = participants;
     try {
       const result: AxiosResponse<any> = await axios.post(
-        'http://localhost:5000/updateParticipants',
+        `${host}/updateParticipants`,
         event
       );
       console.log(result);

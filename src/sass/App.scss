@@ -70,6 +70,7 @@ $background: rgb(77, 207, 194);
     border-radius: 0.3rem;
   }
   button {
+    cursor: pointer;
     color: rgb(240, 240, 240);
     width: 8rem;
     height: 3rem;
@@ -123,7 +124,9 @@ $background: rgb(77, 207, 194);
       display: flex;
       flex-direction: column;
       height: 80%;
+      overflow-y: scroll;
       .List__member {
+        padding: 1rem 0 1rem 0;
         height: 12%;
         width: 100%;
         display: flex;
@@ -166,6 +169,7 @@ $background: rgb(77, 207, 194);
     display: flex;
     justify-content: space-around;
     button {
+      cursor: pointer;
       height: 60%;
       border-radius: 0.2rem;
       background-color: rgb(122, 181, 248);

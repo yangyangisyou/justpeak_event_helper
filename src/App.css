@@ -103,6 +103,7 @@ ol[class] {
 }
 
 .Landing__form button {
+  cursor: pointer;
   color: #f0f0f0;
   width: 8rem;
   height: 3rem;
@@ -195,9 +196,11 @@ ol[class] {
       -ms-flex-direction: column;
           flex-direction: column;
   height: 80%;
+  overflow-y: scroll;
 }
 
 .List .List__container .List__List .List__member {
+  padding: 1rem 0 1rem 0;
   height: 12%;
   width: 100%;
   display: -webkit-box;
@@ -269,6 +272,7 @@ ol[class] {
 }
 
 .List .List__buttons button {
+  cursor: pointer;
   height: 60%;
   border-radius: 0.2rem;
   background-color: #7ab5f8;
