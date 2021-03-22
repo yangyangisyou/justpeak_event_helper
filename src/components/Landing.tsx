@@ -1,12 +1,15 @@
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useState, useContext} from 'react';
+import {StatusContext} from '../controller/context';
 import {request} from '../controller/request';
-import {IEvent} from '../models/models';
+import {IEvent, login_status} from '../models/models';
 interface ILandingProp {
-  logged: boolean;
+  logged: login_status;
   setEventData: Dispatch<SetStateAction<IEvent>>;
-  setLogged: Dispatch<SetStateAction<boolean>>;
+  setLogged: Dispatch<SetStateAction<login_status>>;
 }
 function Landing({setEventData, setLogged, logged}: ILandingProp) {
+  const {status, setNewStatus} = useContext(StatusContext);
+  console.log(status);
   const [passcode, setPassCode] = useState('');
   const [hostName, setHostName] = useState('');
   return (
@@ -41,9 +44,9 @@ function Landing({setEventData, setLogged, logged}: ILandingProp) {
               HostName: hostName,
             });
             //see if passcode is correct
-            if (result.passCode == passcode) {
+            if (result.passCode == passcode && setNewStatus) {
               setEventData(result);
-              setLogged(!logged);
+              setNewStatus(login_status.host);
             }
           }}
         >

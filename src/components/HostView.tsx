@@ -1,8 +1,9 @@
 import {Dispatch, SetStateAction, useState, useRef, useEffect} from 'react';
 import useParticipants from './hooks/useParticipants';
 import * as uuid from 'uuid';
-import {IEvent, IParticipant} from '../models/models';
+import {IEvent, IParticipant, login_status} from '../models/models';
 import {request} from '../controller/request';
+import {createFalse} from 'typescript';
 
 interface participant extends IParticipant {
   key: string;
@@ -10,9 +11,9 @@ interface participant extends IParticipant {
   index: number;
 }
 
-interface IListProps {
+interface IHostViewProps {
   eventData: IEvent;
-  setLogged: Dispatch<SetStateAction<boolean>>;
+  setLogged: Dispatch<SetStateAction<login_status>>;
 }
 
 function Participant({
@@ -55,7 +56,7 @@ function Participant({
   );
 }
 
-function List({eventData, setLogged}: IListProps) {
+function HostView({eventData, setLogged}: IHostViewProps) {
   const {
     eventId,
     eventName,
@@ -74,8 +75,11 @@ function List({eventData, setLogged}: IListProps) {
   function Confirm(ref: any) {
     useEffect(() => {
       document.addEventListener('click', (evt: any) => {
-        if (ref.current && !ref.current.contains(evt.target)) {
+        console.log(ref.current !== evt.target);
+        if (ref.current !== evt.target) {
           setConfirmSubmit(false);
+        } else {
+          setConfirmSubmit(true);
         }
       });
     }, [ref]);
@@ -108,12 +112,18 @@ function List({eventData, setLogged}: IListProps) {
     );
   });
   return (
-    <div className='List'>
+    <div
+      className='List'
+      onClick={(evt) => {
+        // console.log(evt.target);
+        setConfirmSubmit(false);
+      }}
+    >
       {success ? (
         <div
           className='List__success'
           onClick={() => {
-            setLogged(false);
+            setLogged(login_status.default);
             setSuccess(false);
           }}
         >
@@ -143,11 +153,14 @@ function List({eventData, setLogged}: IListProps) {
         </div>
       </div>
 
-      <div className='List__buttons' ref={confirmRef}>
+      <div className='List__buttons'>
         {/* <button className='text'>Generate text</button> */}
         <button
+          // ref={confirmRef}
           className={confirmSubmit ? 'confirm' : 'submit'}
           onClick={(evt) => {
+            evt.stopPropagation();
+            // console.log(evt.target);
             // console.log(evt.target);
             setConfirmSubmit(true);
 
@@ -166,4 +179,4 @@ function List({eventData, setLogged}: IListProps) {
   );
 }
 
-export default List;
+export default HostView;

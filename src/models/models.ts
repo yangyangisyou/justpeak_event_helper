@@ -20,3 +20,9 @@ export interface IPassCode {
   Code: string;
   HostName: string;
 }
+
+export enum login_status {
+  admin = 'admin',
+  host = 'host',
+  default ='',
+}

@@ -1,12 +1,16 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import * as ReactDOM from 'react-dom';
 import './index.css';
-import App, {Wrapper} from './App';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {login_status} from './models/models';
+import {StatusContext, StatusProvider} from './controller/context';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Wrapper />
+    <StatusProvider>
+      <App />
+    </StatusProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
