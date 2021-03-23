@@ -1,15 +1,18 @@
 import {Dispatch, SetStateAction, useState, useContext} from 'react';
-import {StatusContext} from '../controller/context';
+import {StatusContext} from '../controller/contexts/statusContext';
+import {HostContext} from '../controller/contexts/hostContext';
+
 import {request} from '../controller/request';
 import {IEvent, login_status} from '../models/models';
+import {Link} from 'react-router-dom';
 interface ILandingProp {
-  logged: login_status;
   setEventData: Dispatch<SetStateAction<IEvent>>;
   setLogged: Dispatch<SetStateAction<login_status>>;
 }
-function Landing({setEventData, setLogged, logged}: ILandingProp) {
+function Landing({setEventData, setLogged}: ILandingProp) {
   const {status, setNewStatus} = useContext(StatusContext);
-  console.log(status);
+  const {hostInfo, setHostInfo} = useContext(HostContext);
+  // console.log(status);
   const [passcode, setPassCode] = useState('');
   const [hostName, setHostName] = useState('');
   return (
@@ -37,21 +40,18 @@ function Landing({setEventData, setLogged, logged}: ILandingProp) {
           ></input>
         </div>
 
-        <button
-          onClick={async (evt) => {
-            const result = await request.getParticipants({
-              Code: passcode,
-              HostName: hostName,
-            });
-            //see if passcode is correct
-            if (result.passCode == passcode && setNewStatus) {
-              setEventData(result);
-              setNewStatus(login_status.host);
-            }
-          }}
-        >
-          Submit
-        </button>
+        <Link to='/host'>
+          <button
+            onClick={() => {
+              if (setNewStatus && setHostInfo) {
+                setNewStatus(login_status.host);
+                setHostInfo({HostName: hostName, Code: passcode});
+              }
+            }}
+          >
+            Submit
+          </button>
+        </Link>
       </div>
     </div>
   );

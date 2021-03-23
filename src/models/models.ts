@@ -24,5 +24,12 @@ export interface IPassCode {
 export enum login_status {
   admin = 'admin',
   host = 'host',
-  default ='',
+  default = '',
+}
+
+export enum page_status {
+  success = 'success',
+  wrong = 'wrong',
+  wait = 'wait',
+  default = '',
 }

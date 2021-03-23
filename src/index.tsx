@@ -4,7 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {login_status} from './models/models';
-import {StatusContext, StatusProvider} from './controller/context';
+import {
+  StatusContext,
+  StatusProvider,
+} from './controller/contexts/statusContext';
 
 ReactDOM.render(
   <React.StrictMode>
