@@ -1,6 +1,6 @@
-interface IAdminViewProps {
-  adminName: string;
-}
+import {useContext} from 'react';
+import {StatusContext} from '../controller/contexts/statusContext';
+
 interface IAdminEvents {
   week: number;
   topic: string;
@@ -16,10 +16,13 @@ function Event({week, topic, people}: IAdminEvents) {
   );
 }
 
-function AdminView({adminName}: IAdminViewProps) {
+function AdminView() {
+  const {status, userName, setNewStatus, setUserName} = useContext(
+    StatusContext
+  );
   return (
     <div className='Admin'>
-      <h1>Welcome {adminName} !</h1>
+      <h1>Welcome {userName} !</h1>
 
       <div className='Admin__container'>
         <div className='Admin__info'>

@@ -52,6 +52,9 @@ function App() {
             <Route exact path='/host'>
               <HostView eventData={eventData} />
             </Route>
+            <Route exact path='/admin'>
+              <AdminView />
+            </Route>
           </HostProvider>
         </Switch>
       </div>

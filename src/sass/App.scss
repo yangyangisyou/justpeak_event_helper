@@ -51,7 +51,35 @@ $background: rgb(77, 207, 194);
   flex-direction: column;
   justify-content: center;
 }
-
+.Landing__Admin {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  cursor: pointer;
+  color: rgb(240, 240, 240);
+  width: 5rem;
+  height: 3rem;
+  background-color: $background;
+  border: 0.2rem solid rgb(233, 220, 34);
+  border-radius: 0.3rem;
+}
+.Landing__Warning {
+  padding: 0 1rem 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  color: rgb(240, 240, 240);
+  width: 80%;
+  height: 50%;
+  background-color: rgba(3, 3, 3, 0.9);
+  text-align: center;
+  font-size: 1.1rem;
+}
 .Landing__form {
   height: 30rem;
   display: flex;

@@ -33,3 +33,8 @@ export enum page_status {
   wait = 'wait',
   default = '',
 }
+
+export interface IAdminInfo {
+  AdminName: string;
+  Password: string;
+}

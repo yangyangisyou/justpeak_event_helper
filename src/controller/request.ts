@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {IEvent, IParticipant, IPassCode} from '../models/models';
+import {IAdminInfo, IEvent, IParticipant, IPassCode} from '../models/models';
 
 const host = process.env.REACT_APP_APIHOST;
 type EventInfo = IEvent;
@@ -30,6 +30,17 @@ export const request = {
         event
       );
 
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  adminLogin: async function (AdminInfo: IAdminInfo) {
+    try {
+      const result: AxiosResponse<any> = await axios.post(
+        `${host}/admin/login`,
+        AdminInfo
+      );
       return result;
     } catch (error) {
       console.log(error);
