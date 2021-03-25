@@ -37,7 +37,9 @@ ol[class] {
 }
 $formColor: rgb(12, 75, 134);
 $background: rgb(77, 207, 194);
-
+a {
+  text-decoration: none;
+}
 .App {
   background-color: $background;
   height: 100vh;
@@ -106,7 +108,7 @@ $background: rgb(77, 207, 194);
     border: 0.2rem solid $formColor;
     border-radius: 0.3rem;
   }
-  button {
+  .submit {
     cursor: pointer;
     color: rgb(240, 240, 240);
     width: 8rem;

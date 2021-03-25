@@ -201,6 +201,16 @@
   overflow-y: scroll;
 }
 
+.Admin .Admin__container .Admin__EventList .Admin__event tr {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
 .Admin .Admin__container .Admin__EventList .Admin__event th,
 .Admin .Admin__container .Admin__EventList .Admin__event td {
   text-align: center;
@@ -250,6 +260,10 @@ ol[class] {
 
 .html {
   font-size: 10px;
+}
+
+a {
+  text-decoration: none;
 }
 
 .App {
@@ -361,7 +375,7 @@ ol[class] {
   border-radius: 0.3rem;
 }
 
-.Landing__form button {
+.Landing__form .submit {
   cursor: pointer;
   color: #f0f0f0;
   width: 8rem;

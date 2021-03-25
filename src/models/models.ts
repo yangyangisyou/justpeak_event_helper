@@ -5,7 +5,8 @@ export interface IEvent {
   passCode: string;
   eventDate: string;
   participantNumber: number;
-  participants: Array<IParticipant>;
+  week: number;
+  participants?: Array<IParticipant>;
 }
 export interface IParticipant {
   participantId: number;
@@ -37,4 +38,9 @@ export enum page_status {
 export interface IAdminInfo {
   AdminName: string;
   Password: string;
+}
+
+export interface IEventDay {
+  month?: number;
+  day?: number;
 }

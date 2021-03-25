@@ -11,6 +11,11 @@
 
       .Admin__event {
         @extend %view-list-item;
+        tr {
+          width: 100%;
+          display: flex;
+          justify-content: space-evenly;
+        }
         th,
         td {
           text-align: center;

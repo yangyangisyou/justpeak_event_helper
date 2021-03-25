@@ -10,30 +10,33 @@ import useParticipants from './hooks/useParticipants';
 import * as uuid from 'uuid';
 import {
   IEvent,
+  IEventDay,
   IParticipant,
   login_status,
   page_status,
 } from '../models/models';
 import {request} from '../controller/request';
+import {useHistory, useParams} from 'react-router-dom';
+//context
 import {HostContext} from '../controller/contexts/hostContext';
-import {useHistory} from 'react-router-dom';
 import {StatusContext} from '../controller/contexts/statusContext';
 
 interface participant extends IParticipant {
   setPaid: (index: number) => void;
   index: number;
 }
-
-interface IHostViewProps {
-  eventData: IEvent;
+interface IParamtypes {
+  HostName: string;
+  PassCode: string;
 }
-
 //--------------------------Primary Component---------------------
-function HostView({eventData}: IHostViewProps) {
+function HostView() {
+  //Set contexts
   const {status, setNewStatus} = useContext(StatusContext);
-  const host = useContext(HostContext);
+  // const host = useContext(HostContext);
   const history = useHistory();
-  const [EventData, setEventData] = useState<IEvent | undefined>(undefined);
+  //States
+  const [EventData, setEventData] = useState<IEvent>({} as IEvent);
   const {participants, setPaid, setParticipants} = useParticipants(
     (EventData?.participants as Array<IParticipant>) || []
   );
@@ -41,9 +44,11 @@ function HostView({eventData}: IHostViewProps) {
 
   const [confirmSubmit, setConfirmSubmit] = useState(false);
   const [success, setSuccess] = useState(false);
+  //Params from react router
+  let {HostName, PassCode} = useParams<IParamtypes>();
   useEffect(() => {
     async function getEvent() {
-      const {hostInfo} = host;
+      const hostInfo = {HostName: HostName, Code: PassCode};
       const result = await request.getParticipants(hostInfo);
       if (result.status === 200) {
         const data = result.data;
@@ -56,14 +61,14 @@ function HostView({eventData}: IHostViewProps) {
     getEvent();
   }, []);
   useEffect(() => {
-    if (EventData) {
+    if (EventData?.participants) {
       setParticipants(EventData.participants);
     }
   }, [EventData]);
   const {eventId, eventName, hostName, passCode, eventDate, participantNumber} =
     EventData || {};
 
-  const confirmRef = useRef(null);
+  // const confirmRef = useRef(null);
 
   const expected_money = participants.length * 200;
 
@@ -146,9 +151,21 @@ function HostView({eventData}: IHostViewProps) {
                 evt.stopPropagation();
                 // console.log(evt.target);
                 // console.log(evt.target);
-                setConfirmSubmit(true);
+                const now = new Date();
+                const eventDate = new Date(EventData.eventDate);
+                if (
+                  status == login_status.host &&
+                  (now.getMonth() !== eventDate.getMonth() ||
+                    now.getDate() !== eventDate.getDate() ||
+                    now.getHours() > 22)
+                ) {
+                  //TODO create a better method
+                  alert('不能編輯了唷已超過時間');
+                } else {
+                  setConfirmSubmit(true);
+                }
 
-                if (confirmSubmit == true && EventData) {
+                if (confirmSubmit == true) {
                   const result = request.upDatePaid(EventData, participants);
                   if (result) {
                     setSuccess(true);

@@ -1,15 +1,12 @@
-import {Dispatch, SetStateAction, useState, useContext} from 'react';
+import {Dispatch, SetStateAction, useState, useContext, useEffect} from 'react';
 import {StatusContext} from '../controller/contexts/statusContext';
 import {HostContext} from '../controller/contexts/hostContext';
-
+import FacebookLogin from 'react-facebook-login';
 import {request} from '../controller/request';
 import {IEvent, login_status} from '../models/models';
 import {Link} from 'react-router-dom';
-interface ILandingProp {
-  setEventData: Dispatch<SetStateAction<IEvent>>;
-  setLogged: Dispatch<SetStateAction<login_status>>;
-}
-function Landing({setEventData, setLogged}: ILandingProp) {
+
+function Landing() {
   const {status, userName, setUserName, setNewStatus} = useContext(
     StatusContext
   );
@@ -18,6 +15,15 @@ function Landing({setEventData, setLogged}: ILandingProp) {
   const [passcode, setPassCode] = useState('');
   const [hostName, setHostName] = useState('');
   const [adminWarning, setAdminWarning] = useState(false);
+  //parse XFBML to the page
+  useEffect(() => {
+    FB.XFBML.parse();
+  }, []);
+  function getLogin() {
+    FB.getLoginStatus((res) => {
+      console.log(res);
+    });
+  }
   return (
     <div className='Landing'>
       {adminWarning ? (
@@ -78,9 +84,10 @@ function Landing({setEventData, setLogged}: ILandingProp) {
           ></input>
         </div>
 
-        {status == login_status.default ? (
-          <Link to='/host'>
+        {status == login_status.default || login_status.host ? (
+          <Link to={`/host/${hostName}/${passcode}`}>
             <button
+              className='submit'
               onClick={() => {
                 if (setNewStatus && setHostInfo) {
                   setNewStatus(login_status.host);
@@ -95,6 +102,7 @@ function Landing({setEventData, setLogged}: ILandingProp) {
         ) : (
           <Link to='/admin'>
             <button
+              className='submit'
               onClick={async () => {
                 const result = await request.adminLogin({
                   AdminName: hostName,
@@ -111,6 +119,15 @@ function Landing({setEventData, setLogged}: ILandingProp) {
             </button>
           </Link>
         )}
+        <FacebookLogin
+          appId='2218447721622502'
+          icon='fa-facebook'
+          autoLoad={true}
+          fields='name,email,picture'
+          callback={() => {
+            getLogin();
+          }}
+        />
       </div>
     </div>
   );

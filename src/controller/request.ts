@@ -7,10 +7,10 @@ export const request = {
   getParticipants: async function (
     PassCode: IPassCode
   ): Promise<AxiosResponse<any>> {
+    const {Code, HostName} = PassCode;
     try {
-      const result: AxiosResponse<any> = await axios.post(
-        `${host}/login`,
-        PassCode
+      const result: AxiosResponse<any> = await axios.get(
+        `${host}/login?PassCode=${Code}&HostName=${HostName}`
       );
       return result;
     } catch (error) {
@@ -44,6 +44,17 @@ export const request = {
       return result;
     } catch (error) {
       console.log(error);
+    }
+  },
+  adminGetAllEvent: async function (): Promise<AxiosResponse<any>> {
+    try {
+      const result: AxiosResponse<any> = await axios.get(
+        `${host}/admin/events`
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   },
 };

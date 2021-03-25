@@ -4,19 +4,23 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {login_status} from './models/models';
+
 import {
   StatusContext,
   StatusProvider,
 } from './controller/contexts/statusContext';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <StatusProvider>
-      <App />
-    </StatusProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+startApp();
+function startApp() {
+  ReactDOM.render(
+    <React.StrictMode>
+      <StatusProvider>
+        <App />
+      </StatusProvider>
+    </React.StrictMode>,
+    document.getElementById('root')
+  );
+}
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

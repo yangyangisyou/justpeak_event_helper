@@ -14,17 +14,17 @@ import {HostProvider} from './controller/contexts/hostContext';
 function App() {
   console.log(process.env);
   // const {status, setNewStatus} = useContext(StatusContext);
-  const eventIni: IEvent = {
-    eventId: 0,
-    eventName: '',
-    hostName: '',
-    passCode: '',
-    eventDate: '',
-    participantNumber: 0,
-    participants: [],
-  };
-  const [eventData, setEventData] = useState<IEvent>(eventIni);
-  const [logged, setLogged] = useState<login_status>(login_status.default);
+  // const eventIni: IEvent = {
+  //   eventId: 0,
+  //   eventName: '',
+  //   hostName: '',
+  //   passCode: '',
+  //   eventDate: '',
+  //   participantNumber: 0,
+  //   participants: [],
+  // };
+  // const [eventData, setEventData] = useState<IEvent>(eventIni);
+  // const [logged, setLogged] = useState<login_status>(login_status.default);
   // function RenderLogin(logged: login_status) {
   //   switch (status) {
   //     case 'host':
@@ -47,10 +47,10 @@ function App() {
         <Switch>
           <HostProvider>
             <Route exact path='/'>
-              <Landing setEventData={setEventData} setLogged={setLogged} />
+              <Landing />
             </Route>
-            <Route exact path='/host'>
-              <HostView eventData={eventData} />
+            <Route path='/host/:HostName/:PassCode'>
+              <HostView />
             </Route>
             <Route exact path='/admin'>
               <AdminView />
