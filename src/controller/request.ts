@@ -1,16 +1,21 @@
 import axios, {AxiosResponse} from 'axios';
-import {IEvent, IParticipant, IPassCode} from '../models/models';
+import {IAdminInfo, IEvent, IParticipant, IPassCode} from '../models/models';
 
-const host = process.env.REACT_APP_APIHOST;
+const host =
+  process.env.REACT_APP_MODE == 'DEV'
+    ? process.env.REACT_APP_DEVHOST
+    : process.env.REACT_APP_PRODHOST;
 type EventInfo = IEvent;
 export const request = {
-  getParticipants: async function (PassCode: IPassCode): Promise<EventInfo> {
+  getParticipants: async function (
+    PassCode: IPassCode
+  ): Promise<AxiosResponse<any>> {
+    const {Code, HostName} = PassCode;
     try {
-      const result: AxiosResponse<any> = await axios.post(
-        `${host}/login`,
-        PassCode
+      const result: AxiosResponse<any> = await axios.get(
+        `${host}/login?PassCode=${Code}&HostName=${HostName}`
       );
-      return result.data;
+      return result;
     } catch (error) {
       console.log(error.response);
       return error.message;
@@ -27,10 +32,32 @@ export const request = {
         `${host}/updateParticipants`,
         event
       );
-      console.log(result);
-      return event;
+
+      return result;
     } catch (error) {
       console.log(error);
+    }
+  },
+  adminLogin: async function (AdminInfo: IAdminInfo) {
+    try {
+      const result: AxiosResponse<any> = await axios.post(
+        `${host}/admin/login`,
+        AdminInfo
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  adminGetAllEvent: async function (): Promise<AxiosResponse<any>> {
+    try {
+      const result: AxiosResponse<any> = await axios.get(
+        `${host}/admin/events`
+      );
+      return result;
+    } catch (error) {
+      console.log(error);
+      return error;
     }
   },
 };

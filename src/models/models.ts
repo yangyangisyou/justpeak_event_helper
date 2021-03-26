@@ -5,7 +5,8 @@ export interface IEvent {
   passCode: string;
   eventDate: string;
   participantNumber: number;
-  participants: Array<IParticipant>;
+  week: number;
+  participants?: Array<IParticipant>;
 }
 export interface IParticipant {
   participantId: number;
@@ -19,4 +20,27 @@ export interface IParticipant {
 export interface IPassCode {
   Code: string;
   HostName: string;
+}
+
+export enum login_status {
+  admin = 'admin',
+  host = 'host',
+  default = '',
+}
+
+export enum page_status {
+  success = 'success',
+  wrong = 'wrong',
+  wait = 'wait',
+  default = '',
+}
+
+export interface IAdminInfo {
+  AdminName: string;
+  Password: string;
+}
+
+export interface IEventDay {
+  month?: number;
+  day?: number;
 }

@@ -11,6 +11,6 @@ function useParticipants(initialVal: Array<IParticipant>) {
     setParticipants(temp);
     // console.log(temp);
   }
-  return {participants, setPaid};
+  return {participants, setPaid, setParticipants};
 }
 export default useParticipants;
