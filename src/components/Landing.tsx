@@ -16,14 +16,14 @@ function Landing() {
   const [hostName, setHostName] = useState('');
   const [adminWarning, setAdminWarning] = useState(false);
   //parse XFBML to the page
-  useEffect(() => {
-    FB.XFBML.parse();
-  }, []);
-  function getLogin() {
-    FB.getLoginStatus((res) => {
-      console.log(res);
-    });
-  }
+  // useEffect(() => {
+  //   FB.XFBML.parse();
+  // }, []);
+  // function getLogin() {
+  //   FB.getLoginStatus((res) => {
+  //     console.log(res);
+  //   });
+  // }
   return (
     <div className='Landing'>
       {adminWarning ? (
@@ -84,7 +84,7 @@ function Landing() {
           ></input>
         </div>
 
-        {status == login_status.default || login_status.host ? (
+        {status == login_status.default || status == login_status.host ? (
           <Link to={`/host/${hostName}/${passcode}`}>
             <button
               className='submit'
@@ -119,7 +119,7 @@ function Landing() {
             </button>
           </Link>
         )}
-        <FacebookLogin
+        {/* <FacebookLogin
           appId='2218447721622502'
           icon='fa-facebook'
           autoLoad={true}
@@ -127,7 +127,7 @@ function Landing() {
           callback={() => {
             getLogin();
           }}
-        />
+        /> */}
       </div>
     </div>
   );

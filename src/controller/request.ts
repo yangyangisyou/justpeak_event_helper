@@ -1,7 +1,10 @@
 import axios, {AxiosResponse} from 'axios';
 import {IAdminInfo, IEvent, IParticipant, IPassCode} from '../models/models';
 
-const host = process.env.REACT_APP_APIHOST;
+const host =
+  process.env.REACT_APP_MODE == 'DEV'
+    ? process.env.REACT_APP_DEVHOST
+    : process.env.REACT_APP_PRODHOST;
 type EventInfo = IEvent;
 export const request = {
   getParticipants: async function (

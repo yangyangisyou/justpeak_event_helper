@@ -3,6 +3,7 @@ import {StatusContext} from '../controller/contexts/statusContext';
 import {request} from '../controller/request';
 import {IEvent} from '../models/models';
 import {Link} from 'react-router-dom';
+import * as uuid from 'uuid';
 
 interface IAdminEvent extends IEvent {
   index: number;
@@ -17,19 +18,18 @@ function Event({
   passCode,
   participantNumber,
 }: IAdminEvent) {
-  console.log(eventId);
-
   return (
-    <Link
-      className={`Admin__event ${index % 2 === 0 ? 'darkgrey' : 'grey'}`}
-      to={`/host/${hostName}/${passCode}`}
-    >
-      <tr>
-        <td className='week'>{week}</td>
-        <td className='topic'>{eventName}</td>
-        <td className='people'>{participantNumber}</td>
-      </tr>
-    </Link>
+    <tr className={`Admin__event ${index % 2 === 0 ? 'darkgrey' : 'grey'}`}>
+      <td className='week'>
+        <Link to={`/host/${hostName}/${passCode}`}>{week}</Link>
+      </td>
+      <td className='topic'>
+        <Link to={`/host/${hostName}/${passCode}`}>{eventName}</Link>
+      </td>
+      <td className='people'>
+        <Link to={`/host/${hostName}/${passCode}`}>{participantNumber}</Link>
+      </td>
+    </tr>
   );
 }
 
@@ -58,6 +58,7 @@ function AdminView() {
     .map((event: IEvent, index: number) => {
       return (
         <Event
+          key={uuid.v4()}
           passCode={event.passCode}
           eventDate={event.eventDate}
           hostName={event.hostName}
@@ -79,12 +80,14 @@ function AdminView() {
           <p>Total Participants :</p>
         </div>
         <table className='Admin__EventList'>
-          <tr className='Admin__event'>
-            <th className='week'>week</th>
-            <th className='topic'>Topic</th>
-            <th className='people'>People </th>
-          </tr>
-          {eventListView}
+          <tbody>
+            <tr className='Admin__event'>
+              <th className='week'>week</th>
+              <th className='topic'>Topic</th>
+              <th className='people'>People </th>
+            </tr>
+            {eventListView}
+          </tbody>
         </table>
       </div>
 
