@@ -15,15 +15,15 @@ function Landing() {
   const [passcode, setPassCode] = useState('');
   const [hostName, setHostName] = useState('');
   const [adminWarning, setAdminWarning] = useState(false);
-  //parse XFBML to the page
+  // parse XFBML to the page
   // useEffect(() => {
   //   FB.XFBML.parse();
   // }, []);
-  // function getLogin() {
-  //   FB.getLoginStatus((res) => {
-  //     console.log(res);
-  //   });
-  // }
+  function getLogin() {
+    FB.getLoginStatus((res) => {
+      console.log(res);
+    });
+  }
   return (
     <div className='Landing'>
       {adminWarning ? (
@@ -119,7 +119,7 @@ function Landing() {
             </button>
           </Link>
         )}
-        {/* <FacebookLogin
+        <FacebookLogin
           appId='2218447721622502'
           icon='fa-facebook'
           autoLoad={true}
@@ -127,7 +127,7 @@ function Landing() {
           callback={() => {
             getLogin();
           }}
-        /> */}
+        />
       </div>
     </div>
   );
