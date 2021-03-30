@@ -50,7 +50,7 @@ function App() {
       <div className='App'>
         <Switch>
           <HostProvider>
-            <Route exact path='/'>
+            <Route exact path='/login'>
               <Landing />
             </Route>
             {auth == null ? (
@@ -65,7 +65,7 @@ function App() {
                 still waiting
               </div>
             ) : auth == false ? (
-              <Redirect to='/' />
+              <Redirect to='/login' />
             ) : (
               <PrivateRoute />
             )}

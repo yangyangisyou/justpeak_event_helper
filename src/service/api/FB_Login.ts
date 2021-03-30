@@ -2,8 +2,6 @@ import axios, {AxiosResponse} from 'axios';
 
 interface IFBInfo {
   id: string;
-  name: string;
-  email: string;
 }
 interface IFBMember extends IFBInfo {
   link: string;
@@ -19,7 +17,7 @@ export const FB_Login = {
   CheckMember: async (info: IFBInfo) => {
     try {
       const result = await axios.get(
-        `${host}/login?id=${info.id}&name=${info.name}&email=${info.email}`
+        `${host}/member/checkmember?MemberId=${info.id}`
       );
       return result;
     } catch (error) {
