@@ -6,7 +6,7 @@ Please Feel Free to Join Us!
 
 # Table of Contents
 
-- [General Info](#General Info)
+- [General Info](#General-Info)
 
 - [Technology](#Technology)
 
