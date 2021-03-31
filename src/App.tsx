@@ -1,5 +1,10 @@
-import {Component, useState, useContext} from 'react';
-import {Switch, BrowserRouter as Router, Route} from 'react-router-dom';
+import {Component, useState, useContext, useEffect} from 'react';
+import {
+  Switch,
+  BrowserRouter as Router,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import './App.css';
 import Landing from './components/Landing';
 import HostView from './components/HostView';
@@ -7,54 +12,63 @@ import AdminView from './components/AdminView';
 import {IEvent, login_status} from './models/models';
 import {StatusContext} from './controller/contexts/statusContext';
 import {HostProvider} from './controller/contexts/hostContext';
+import {AuthContext} from './controller/contexts/authContext';
 
 // import dotenv from 'dotenv';
 // dotenv.config();
 
+function PrivateRoute() {
+  return (
+    <div>
+      <Route path='/host/:HostName/:PassCode'>
+        <HostView />
+      </Route>
+      <Route exact path='/admin'>
+        <AdminView />
+      </Route>
+    </div>
+  );
+}
 function App() {
+  const {auth, setAuth} = useContext(AuthContext);
+  let display;
+  console.log(auth);
   console.log(process.env);
-  // const {status, setNewStatus} = useContext(StatusContext);
-  // const eventIni: IEvent = {
-  //   eventId: 0,
-  //   eventName: '',
-  //   hostName: '',
-  //   passCode: '',
-  //   eventDate: '',
-  //   participantNumber: 0,
-  //   participants: [],
-  // };
-  // const [eventData, setEventData] = useState<IEvent>(eventIni);
-  // const [logged, setLogged] = useState<login_status>(login_status.default);
-  // function RenderLogin(logged: login_status) {
-  //   switch (status) {
-  //     case 'host':
-  //       return <HostView eventData={eventData} setLogged={setLogged} />;
-  //     case 'admin':
-  //       return <AdminView adminName={'Darren'} />;
-  //     default:
-  //       return (
-  //         <Landing
-  //           setEventData={setEventData}
-  //           setLogged={setLogged}
-  //           logged={logged}
-  //         />
-  //       );
-  //   }
-  // }
+  useEffect(() => {
+    window.FB.getLoginStatus((res) => {
+      const {status} = res;
+      if (status === 'connected') {
+        setAuth(true);
+      } else {
+        setAuth(false);
+      }
+    });
+  }, []);
+
   return (
     <Router>
       <div className='App'>
         <Switch>
           <HostProvider>
-            <Route exact path='/'>
+            <Route exact path='/login'>
               <Landing />
             </Route>
-            <Route path='/host/:HostName/:PassCode'>
-              <HostView />
-            </Route>
-            <Route exact path='/admin'>
-              <AdminView />
-            </Route>
+            {auth == null ? (
+              <div
+                style={{
+                  width: '100vw',
+                  height: '100vh',
+                  backgroundColor: 'yellow',
+                }}
+              >
+                {' '}
+                still waiting
+              </div>
+            ) : auth == false ? (
+              <Redirect to='/login' />
+            ) : (
+              <PrivateRoute />
+            )}
           </HostProvider>
         </Switch>
       </div>
