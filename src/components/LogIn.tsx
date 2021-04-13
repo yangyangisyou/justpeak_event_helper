@@ -9,7 +9,8 @@ import {IEvent, login_status} from '../models/models';
 import {Link} from 'react-router-dom';
 import {useForm} from './hooks/useForm';
 
-function RegisterForm() {
+
+function RegisterForm({setAuth}:any) {
   //type memberInfo
   const [memberInfo, SetMemberInfo] = useForm({});
   useEffect(() => {
@@ -32,33 +33,43 @@ function RegisterForm() {
   }, []);
 
   return (
-    <form className='Register'>
-      <input id='Email' disabled defaultValue={memberInfo.Email}></input>{' '}
+    <form className='Register'
+    onSubmit={async (evt) => {
+      evt.preventDefault();
+      const result = await FB_Login.CreateMember(memberInfo);
+      if(result.status === 200){
+        setAuth(true)
+      }
+      //send data to backend and if success set auth
+
+    }}>
+      <label htmlFor='Email'>Email</label>
+      <input id='Email'  defaultValue={memberInfo.Email}></input>{' '}
+      <label htmlFor='NameEng'>English Name</label>
       <input
-        id='name_Eng'
+        id='NameEng'
         onChange={(evt) => {
           SetMemberInfo(evt.target.id, evt.target.value);
           console.log(memberInfo);
         }}
       ></input>{' '}
+      <label htmlFor='NameZht'> Chinese Name</label>
       <input
-        id='name_Zht'
+        id='NameZht'
         onChange={(evt) => {
           SetMemberInfo(evt.target.id, evt.target.value);
           console.log(memberInfo);
         }}
       ></input>{' '}
-      <button
-        onSubmit={() => {
-          //send data to backend and if success set auth
-        }}
+      <button type='submit'
+        
       >
         Register
       </button>
     </form>
   );
 }
-function Landing() {
+function LogIn() {
   const {status, userName, setUserName, setNewStatus} = useContext(
     StatusContext
   );
@@ -84,7 +95,7 @@ function Landing() {
       //   }
       // }}
     >
-      {showRegister ? <RegisterForm /> : ''}
+      {showRegister ? <RegisterForm setAuth={setAuth} /> : ''}
       <div className='Landing__form'>
         <h1>
           {status == login_status.admin
@@ -103,7 +114,7 @@ function Landing() {
               {fields: 'id'},
               //TODO check if database has this info
               async function (response: any) {
-                const result = await CheckMember({id: response.id});
+                const result = await CheckMember({MemberId: response.id});
                 //if result is goood set auth
                 if (result.status === 200) {
                   console.log(result);
@@ -121,4 +132,4 @@ function Landing() {
   );
 }
 
-export default Landing;
+export default LogIn;
