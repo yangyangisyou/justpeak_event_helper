@@ -1,12 +1,13 @@
 import axios, {AxiosResponse} from 'axios';
 
 interface IFBInfo {
-  id: string;
+  MemberId: string;
 }
 interface IFBMember extends IFBInfo {
-  link: string;
-  name_eng: string;
-  name_zht: string;
+  FbLink: string;
+  NameFb:string;
+  NameEng: string;
+  NameZht: string;
 }
 const host =
   process.env.REACT_APP_MODE == 'DEV'
@@ -18,7 +19,7 @@ export const FB_Login = {
   CheckMember: async (info: IFBInfo): Promise<AxiosResponse<any>> => {
     try {
       const result = await axios.get(
-        `${host}/member/checkmember?MemberId=${info.id}`
+        `${host}/member/checkmember?MemberId=${info.MemberId}`
       );
       return result;
     } catch (error) {
@@ -28,7 +29,7 @@ export const FB_Login = {
   //Create member to Database by using FB api
   CreateMember: async (Member: IFBMember) => {
     try {
-      const result = axios.post(`${host}/member/createMember`, Member);
+      const result = axios.post(`${host}/member/createMember`, Member,{withCredentials:true});
       return result;
     } catch (error) {
       return error;

@@ -6,13 +6,14 @@ import {
   Redirect,
 } from 'react-router-dom';
 import './App.css';
-import Landing from './components/Landing';
+import LogIn from './components/LogIn';
 import HostView from './components/HostView';
 import AdminView from './components/AdminView';
 import {IEvent, login_status} from './models/models';
 import {StatusContext} from './controller/contexts/statusContext';
 import {HostProvider} from './controller/contexts/hostContext';
 import {AuthContext} from './controller/contexts/authContext';
+import { FB_Login } from './service/api/FB_Login';
 
 // import dotenv from 'dotenv';
 // dotenv.config();
@@ -35,14 +36,39 @@ function App() {
   console.log(auth);
   console.log(process.env);
   useEffect(() => {
-    window.FB.getLoginStatus((res) => {
-      const {status} = res;
-      if (status === 'connected') {
-        setAuth(true);
-      } else {
-        setAuth(false);
-      }
-    });
+     function getInfoFB(){
+      return new Promise<string>((resolve, reject) => {
+        FB.api(
+          '/me',
+          'get',
+          {fields: 'id'},(res :any)=>{
+            if(res){resolve(res.id)}            
+          })
+      })
+    }
+    async function CheckMember(){
+      window.FB.getLoginStatus(async res=>{
+        const {status} = res;
+        if(status === 'connected'){
+          const MemberId =  await getInfoFB();
+          const result = await FB_Login.CheckMember({MemberId: MemberId})
+          if(result.status === 200){
+            setAuth(true)
+          }else{setAuth(false)}
+          
+        }else{setAuth(false)}
+        
+      })
+      
+    }CheckMember();
+    // window.FB.getLoginStatus((res) => {
+    //   const {status} = res;
+    //   if (status === 'connected') {
+    //     setAuth(true);
+    //   } else {
+    //     setAuth(false);
+    //   }
+    // });
   }, []);
 
   return (
@@ -51,7 +77,7 @@ function App() {
         <Switch>
           <HostProvider>
             <Route exact path='/login'>
-              <Landing />
+              <LogIn />
             </Route>
             {auth == null ? (
               <div
