@@ -6,14 +6,14 @@ import {
   Redirect,
 } from 'react-router-dom';
 import './App.css';
-import LogIn from './components/LogIn';
-import HostView from './components/HostView';
-import AdminView from './components/AdminView';
-import {IEvent, login_status} from './models/models';
-import {StatusContext} from './controller/contexts/statusContext';
-import {HostProvider} from './controller/contexts/hostContext';
-import {AuthContext} from './controller/contexts/authContext';
-import { FB_Login } from './service/api/FB_Login';
+import LogIn from './components/Login/LogIn';
+import HostView from './components/Event/HostView';
+import AdminView from './components/Admin/AdminView';
+// import {StatusContext} from './shared/contexts/statusContext';
+// import {HostProvider} from './shared/contexts/hostContext';
+import {AuthContext} from './shared/contexts/authContext';
+import {FB_Login} from './service/api/FB_Login';
+import Header from './components/Header';
 
 // import dotenv from 'dotenv';
 // dotenv.config();
@@ -21,65 +21,66 @@ import { FB_Login } from './service/api/FB_Login';
 function PrivateRoute() {
   return (
     <div>
-      <Route path='/host/:HostName/:PassCode'>
-        <HostView />
-      </Route>
+      <Route path='/host/:HostName/:PassCode'>{/* <HostView /> */}</Route>
       <Route exact path='/admin'>
-        <AdminView />
+        {/* <AdminView /> */}
       </Route>
     </div>
   );
 }
 function App() {
-  const {auth, setAuth} = useContext(AuthContext);
-  let display;
-  console.log(auth);
-  console.log(process.env);
-  useEffect(() => {
-     function getInfoFB(){
-      return new Promise<string>((resolve, reject) => {
-        FB.api(
-          '/me',
-          'get',
-          {fields: 'id'},(res :any)=>{
-            if(res){resolve(res.id)}            
-          })
-      })
-    }
-    async function CheckMember(){
-      window.FB.getLoginStatus(async res=>{
-        const {status} = res;
-        if(status === 'connected'){
-          const MemberId =  await getInfoFB();
-          const result = await FB_Login.CheckMember({MemberId: MemberId})
-          if(result.status === 200){
-            setAuth(true)
-          }else{setAuth(false)}
-          
-        }else{setAuth(false)}
-        
-      })
-      
-    }CheckMember();
-    // window.FB.getLoginStatus((res) => {
-    //   const {status} = res;
-    //   if (status === 'connected') {
-    //     setAuth(true);
-    //   } else {
-    //     setAuth(false);
-    //   }
-    // });
-  }, []);
+  // const {auth, setAuth} = useContext(AuthContext);
+  // let display;
+  // console.log(auth);
+  // console.log(process.env);
+  // useEffect(() => {
+  //    function getInfoFB(){
+  //     return new Promise<string>((resolve, reject) => {
+  //       FB.api(
+  //         '/me',
+  //         'get',
+  //         {fields: 'id'},(res :any)=>{
+  //           if(res){resolve(res.id)}
+  //         })
+  //     })
+  //   }
+  //   async function CheckMember(){
+  //     window.FB.getLoginStatus(async res=>{
+  //       const {status} = res;
+  //       if(status === 'connected'){
+  //         const MemberId =  await getInfoFB();
+  //         const result = await FB_Login.CheckMember({MemberId: MemberId})
+  //         if(result.status === 200){
+  //           setAuth(true)
+  //         }else{setAuth(false)}
+
+  //       }else{setAuth(false)}
+
+  //     })
+
+  //   }CheckMember();
+  //   // window.FB.getLoginStatus((res) => {
+  //   //   const {status} = res;
+  //   //   if (status === 'connected') {
+  //   //     setAuth(true);
+  //   //   } else {
+  //   //     setAuth(false);
+  //   //   }
+  //   // });
+  // }, []);
 
   return (
     <Router>
       <div className='App'>
         <Switch>
-          <HostProvider>
-            <Route exact path='/login'>
+          {/* <HostProvider> */}
+          <Route exact path='/login'>
+            <Header title='SignUp'>
               <LogIn />
-            </Route>
-            {auth == null ? (
+            </Header>
+          </Route>
+
+          {/* {auth == null ? (
               <div
                 style={{
                   width: '100vw',
@@ -94,8 +95,8 @@ function App() {
               <Redirect to='/login' />
             ) : (
               <PrivateRoute />
-            )}
-          </HostProvider>
+            )} */}
+          {/* </HostProvider> */}
         </Switch>
       </div>
     </Router>

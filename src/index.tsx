@@ -3,13 +3,13 @@ import * as ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {login_status} from './models/models';
-import {AuthProvider} from './controller/contexts/authContext';
+// import {login_status} from './models/models';
+import {AuthProvider} from './shared/contexts/authContext';
 
-import {
-  StatusContext,
-  StatusProvider,
-} from './controller/contexts/statusContext';
+// import {
+//   StatusContext,
+//   StatusProvider,
+// } from './shared/contexts/statusContext';
 
 function FB_init() {
   return new Promise((resolve) => {
@@ -43,9 +43,9 @@ function startApp() {
   ReactDOM.render(
     <React.StrictMode>
       <AuthProvider>
-        <StatusProvider>
+        {/* <StatusProvider> */}
           <App />
-        </StatusProvider>
+        {/* </StatusProvider> */}
       </AuthProvider>
     </React.StrictMode>,
     document.getElementById('root')
