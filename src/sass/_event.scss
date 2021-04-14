@@ -1,0 +1,64 @@
+.EventWrap {
+  overflow: hidden;
+}
+.Event {
+  padding-top: 1.5rem;
+  width: 100%;
+  min-height: min-content;
+  height: 90vh;
+  max-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: scroll;
+}
+.EventItem {
+  margin-bottom: 1.5rem;
+  background-color: grey;
+  flex-shrink: 0;
+  height: 30%;
+  width: 90%;
+  background-color: green;
+  div {
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  }
+  .ThisWeek {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/3;
+    grid-row: 1/2;
+  }
+  .Date {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/3;
+    grid-row: 2/3;
+  }
+  .HostName {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/6;
+    grid-row: 3/4;
+  }
+  button {
+    grid-column: 4/6;
+    grid-row: 1/2;
+  }
+  .EventName {
+    align-self: center;
+    justify-self: center;
+    grid-column: 1/6;
+    grid-row: 4/5;
+  }
+  .More {
+    align-self: center;
+    justify-self: center;
+    grid-column: 4/6;
+    grid-row: 5/6;
+  }
+}

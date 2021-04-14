@@ -43,24 +43,32 @@ function RegisterForm({setAuth}: any) {
         //send data to backend and if success set auth
       }}
     >
-      <label htmlFor='Email'>Email</label>
-      <input id='Email' defaultValue={memberInfo.Email}></input>{' '}
-      <label htmlFor='NameEng'>English Name</label>
-      <input
-        id='NameEng'
-        onChange={(evt) => {
-          SetMemberInfo(evt.target.id, evt.target.value);
-          console.log(memberInfo);
-        }}
-      ></input>{' '}
-      <label htmlFor='NameZht'> Chinese Name</label>
-      <input
-        id='NameZht'
-        onChange={(evt) => {
-          SetMemberInfo(evt.target.id, evt.target.value);
-          console.log(memberInfo);
-        }}
-      ></input>{' '}
+      <div className='Register__Form'>
+        <div>
+          <label htmlFor='Email'>Email</label>
+          <input id='Email' defaultValue={memberInfo.Email}></input>
+        </div>
+        <div>
+          <label htmlFor='NameEng'>English Name</label>
+          <input
+            id='NameEng'
+            onChange={(evt) => {
+              SetMemberInfo(evt.target.id, evt.target.value);
+              console.log(memberInfo);
+            }}
+          ></input>{' '}
+        </div>
+        <div>
+          <label htmlFor='NameZht'> Chinese Name</label>
+          <input
+            id='NameZht'
+            onChange={(evt) => {
+              SetMemberInfo(evt.target.id, evt.target.value);
+              console.log(memberInfo);
+            }}
+          ></input>
+        </div>
+      </div>
       <button type='submit'>Register</button>
     </form>
   );
@@ -69,10 +77,11 @@ function LogIn() {
   // const {status, userName, setUserName, setNewStatus} = useContext(
   //   StatusContext
   // );
-  // const {setAuth} = useContext(AuthContext);
+  const {setAuth} = useContext(AuthContext);
   // const {hostInfo, setHostInfo} = useContext(HostContext);
   // const {CreateMember, CheckMember} = FB_Login;
-  // const [showRegister, setShowRegister] = useState(false);
+
+  const [showRegister, setShowRegister] = useState(false);
 
   //TODO add useEffect to check Login at first
   // console.log(status);
@@ -83,6 +92,7 @@ function LogIn() {
 
   return (
     <div className='Login'>
+      {showRegister ? <RegisterForm setAuth={setAuth} /> : ''}
       <div className='Login__EventThisWeek'>
         <h3>Event This Week</h3>
         <h3>Apr.10 (Fri)</h3>
@@ -112,7 +122,6 @@ function LogIn() {
     //   //   }
     //   // }}
     // >
-    //   {/* {showRegister ? <RegisterForm setAuth={setAuth} /> : ''}
     //   <div className='Landing__form'>
     //     <h1>
     //       {status == login_status.admin

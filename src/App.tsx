@@ -14,6 +14,7 @@ import AdminView from './components/Admin/AdminView';
 import {AuthContext} from './shared/contexts/authContext';
 import {FB_Login} from './service/api/FB_Login';
 import Header from './components/Header';
+import Events from './components/Event/Events';
 
 // import dotenv from 'dotenv';
 // dotenv.config();
@@ -79,7 +80,11 @@ function App() {
               <LogIn />
             </Header>
           </Route>
-
+          <Route exact path='/events'>
+            <Header title='Events'>
+              <Events />
+            </Header>
+          </Route>
           {/* {auth == null ? (
               <div
                 style={{

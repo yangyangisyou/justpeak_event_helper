@@ -1,38 +1,4 @@
 @import 'header';
 @import 'login';
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-ul[class],
-ol[class],
-li,
-figure,
-figcaption,
-blockquote,
-dl,
-dd {
-  margin: 0;
-}
-ul[class],
-ol[class] {
-  list-style: none;
-}
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-.html {
-  font-size: 10px;
-}
-%color {
-  background-color: black;
-}
-$formColor: rgb(12, 75, 134);
-$background: rgb(77, 207, 194);
-a {
-  text-decoration: none;
-}
+@import 'initials';
+@import 'event';
